@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         GlideApp.with(this)
-                .load("https://user-images.githubusercontent.com/43799962/74223081-4667d900-4cf9-11ea-94e0-d2db72213dc7.jpg")
+                .load("Web上の画像のURL")
                 .error(ColorDrawable(Color.RED))
                 .placeholder(ColorDrawable(Color.GRAY)) // この行を追加
                 .transform(RoundedCorners(32))  // この行を追加
