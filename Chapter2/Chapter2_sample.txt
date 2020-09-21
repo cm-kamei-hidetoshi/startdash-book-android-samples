@@ -1,0 +1,622 @@
+## 2-1 Kotlinをはじめる
+リスト2-1 
+print(1 + 1) // Command+Enterで実行
+// 2
+
+
+## 2-2 変数とコメント
+リスト2-7
+var a: String = "abc"
+a = "xyz" // 再代入OK
+print(a) // Command+Enterで実行
+// xyz
+
+
+## 2-3 Kotlinにおける型を理解する
+リスト2-9
+val a = 1
+val b = 2
+print(a + b) // Command+Enterで実行
+// 3
+
+
+リスト2-11
+val a: Long = 1_000L
+val b: Long = 10_00L
+val c: Long = 100_0L
+print(a)
+print(c)
+print(c) // Command+Enterで実行
+// 100010001000
+
+
+リスト2-12
+val pi = 3.14
+val r = 3
+print(r * r * pi) // Command+Enterで実行
+// 28.26
+
+
+リスト2-14
+val a = (1 + 1) * 2
+print(a) // Command+Enterで実行。(1 + 1)が先に計算される
+// 4
+
+
+リスト2-16
+val a = """Hello
+World"""
+print(a) // Command+Enterで実行
+// Hello
+// World
+
+
+リスト2-17
+val a = """
+     |Hello
+     |World
+     """
+print(a.trimMargin()) // Command+Enterで実行
+// Hello
+// World
+
+
+リスト2-18
+val a = "Hello" + " World!"
+print(a) // Command+Enterで実行
+// Hello World!
+
+
+リスト2-19
+val a = 100.toString() + "回"
+print(a) // Command+Enterで実行
+// 100回
+
+
+リスト2-20
+val orange = 3  
+val apple = 4  
+print("オレンジ $orange りんご $apple 合計 ${orange + apple}個") // Command+Enterで実行
+// オレンジ 3 りんご 4 合計 7個
+
+
+リスト2-21
+print("abc"[0]) // Command+Enterで実行
+// a
+
+
+リスト2-24
+val a: Int = 1
+val b: Int = 2
+print(a == b) // Command+Enterで実行
+// false
+
+
+リスト2-25
+val a: String = "a"
+val b: String = "a"
+print(a == b) // Command+Enterで実行
+// true
+
+
+リスト2-27
+var a = 1
+a += 2
+print(a) // Command+Enterで実行
+// 3
+
+
+リスト2-28
+val zeroToTen = 0..10
+print(0 in zeroToTen)
+print(0 !in zeroToTen) // !inで範囲外か判定できる Command+Enterで実行
+// truefalse
+
+
+リスト2-31
+var a: String? = null
+val b: String? = a ?: "abc"
+print(b) // Command+Enterで実行
+// abc
+
+
+リスト2-32
+var a: String? = "abc"
+var b: String = a!! // aがnullの場合は実行時にエラーとなる
+print(b) // Command+Enterで実行
+// abc
+
+
+## 2-4 条件分岐 (if文とwhen文)
+リスト2-34 if文の記述例
+var temperature: Int = 27
+if (temperature >= 25 && temperature <= 30) {
+    print("夏日です")
+}
+// 夏日です
+
+
+リスト2-36 if else文の記述例
+var temperature: Int = 40
+if(temperature >= 35){
+    print("猛暑日です")
+} else if(temperature >= 30){
+    print("真夏日です")
+} else if(temperature >= 25){
+    print("夏日です")
+} else {
+    print("該当なし")
+}
+// 猛暑日です
+
+
+リスト2-37
+val a: Int = 100
+val b: Int = if (a < 100) 0 else 200
+print(b)
+// 200
+
+
+リスト2-40 数値の記述例
+val a = 1
+when (a) {
+    1 -> {
+        // aが1のケース
+        print("a=1です") 
+    }
+    else -> {
+        // aが1以外のケース
+        print("a!=1です") 
+    }
+}
+// a=1です
+
+
+リスト2-41 文字の記述例
+val animal = "cat"
+when (animal) {
+    "cat" -> print("猫です")
+    else -> print("猫ではないです")
+}
+// 猫です
+
+
+リスト2-42
+val score: Int = 10 // scoreは最小1、最大10
+when (score) {
+    9, 10 -> print("scoreは9もしくは10です") // 条件の複数指定
+    in 1..3 -> print("scoreは1から3までの範囲内です") // 条件の範囲指定
+    !in 1..10 -> print("scoreは1から10までの範囲外です")
+}
+// scoreは9もしくは10です
+
+
+リスト2-43
+val a: Int = 1
+when {
+    a == 1 -> print("aは1です")
+    a is String -> print("aはString型です")
+    else -> print("その他です")
+}
+// aは1です
+
+
+リスト2-44
+val temperature: Int = 40
+val result: String = when {
+    temperature >= 35 -> "猛暑日です"
+    temperature in 30..34 -> "真夏日です"
+    temperature in 25..29 -> "夏日です"
+    else -> "該当なし"
+}
+print(result)
+// 猛暑日です
+
+
+## 2-5 コレクションと繰り返し (for文)
+リスト2-45
+val numbers = listOf("one", "two", "three", "four") // 型はList<String>
+print("size:${numbers.size} ")
+print("インデックス0の要素:${numbers[0]} ")
+// size:4 インデックス0の要素:one
+
+
+リスト2-46
+val numbers = mutableListOf(1, 2, 3) // 型はMutableList<Int>
+numbers.add(4) // リストの最後に4を追加
+numbers.removeAt(0) // インデックス0番目の要素「1」を削除
+numbers[0] = 0 // インデックス0番目の要素に「0」を代入
+print(numbers)
+// [ 0, 3, 4]
+
+
+リスト2-47
+val numbers = setOf(1, 2, 3) // 型はSet<Int>
+print("size:${numbers.size} ")
+print("インデックス0の要素:${numbers.elementAt(0)} ")
+print("含まれているか:${numbers.contains(1)}")
+// size:3 インデックス0の要素:1 含まれているか:true
+
+
+リスト2-48
+val numbers = mutableSetOf(1, 2, 3) // 型はMutableSet<Int>
+numbers.add(4) // 値を追加
+print(numbers)
+// [1, 2, 3, 4]
+
+
+リスト2-49
+val numbersMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3) // 型はMap<String, Int>
+
+// キーによる値へのアクセス
+val a = numbersMap["key1"] // 型はInt? nullになる可能性あり
+print(a) // 1
+
+// キーの検索
+val containsKey = "key2" in numbersMap
+print(containsKey) // true
+
+// 値の検索
+// 要素が含まれているかどうか その1
+val containsValue = 1 in numbersMap.values
+print(containsValue) // true
+
+// 要素が含まれているかどうか その2
+val containsValue2 = numbersMap.containsValue(1)
+print(containsValue2) // true
+// 1truetruetrue
+
+
+リスト2-50
+val numbersMap = mutableMapOf("one" to 1, "two" to 2) // 型はMutableMap<String, Int>
+numbersMap.put("three", 3) // ペアを追加
+numbersMap["one"] = 11 // 値の更新
+print(numbersMap)
+// {one=11, two=2, three=3}
+
+
+リスト2-51
+val animals = arrayOf("cat", "dog", "rabbit") // 型はArray<String>
+print(animals[0]) // cat
+
+val numbers = intArrayOf(1, 2, 3) // 型はIntArray
+numbers[0] = 0 // 値の代入
+print(numbers[0]) // 0
+// cat0
+
+
+リスト2-53 for文の記述例
+val numbers = listOf("Red", "Blue", Yellow)
+for (i in numbers) {
+    print(i) // 順番に取り出された要素を表示
+}
+// RedBlueYellow
+
+
+リスト2-54
+val animals = listOf("cat", "dog", "rabbit")
+for((index, element) in animals.withIndex()) {
+    print("インデックス:$index,要素:$element ")
+}
+// インデックス:0,要素:cat インデックス:1,要素:dog インデックス:2,要素:rabbit 
+
+
+リスト2-55
+for (i in 0..2) {
+    print(i)
+}
+// 012
+
+
+リスト2-56
+for(i in 2 downTo 0) {
+    print(i)
+}
+// 210
+
+
+リスト2-57
+for(i in 0..9 step 2) {
+    print(i)
+}
+// 02468
+
+
+リスト2-58
+for(i in 0..9) {
+    // iが5ならforループを抜ける
+    if (i == 5) {
+        break
+    }
+    print(i)
+}
+print("end")
+// 01234end
+
+
+リスト2-59
+for(i in 0..9) { // ②continueが実行されたらここに移動する
+    if (i == 5) {
+        continue // ①インデックスが5なら次のループ処理を開始する
+    }
+    print(i)
+}
+// 012346789
+
+
+リスト2-60
+var x = 9
+while(x > 0) {
+    print(x)
+    x--
+}
+print("end")
+// 987654321end
+
+
+## 2-6 クラスと継承
+リスト2-65
+class Cat (var name: String, var steps: Int)
+val cat = Cat("mike", 0) // インスタンス生成
+print(cat.name) // mike
+cat.name = "tama" // 値の更新
+print(cat.name) // tama
+// miketama
+
+
+リスト2-69
+class Cat (var name: String, var steps: Int = 0) {
+
+    fun walk(stepCount: Int) { // 値を返さないので返り値の型は省略
+        steps += stepCount
+        print(これまで"$steps歩、歩いたよ")
+    }
+
+}
+val cat = Cat("mike")
+cat.walk(10) // メソッドの実行 インスタンス.メソッド()
+cat.walk(10)
+// これまで10歩、歩いたよ
+// これまで20歩、歩いたよ
+
+
+リスト2-72
+class Cat {
+    companion object {
+        // 学名
+        val scientificName: String = "イエネコ"
+
+        // 鳴く
+        fun meow() {
+            print("ニャー")
+        }
+    }
+}
+print(Cat.scientificName) // クラス名.プロパティ名でアクセス
+Cat.meow() // クラス名.メソッド名でアクセス
+// イエネコ
+// ニャー
+
+
+リスト2-75
+open class Animal(var weight: Int)
+
+// コンストラクターのパラメーターを使って初期化
+class Cat(var name: String, weight: Int): Animal(weight)
+val cat = Cat("mike", 10)
+print(cat.name)
+// mike
+
+
+リスト2-76
+open class Animal {
+    // オーバーライドされるメソッドにキーワードopenをつける
+    open fun say() {}
+}
+class Cat: Animal() {
+    // オーバーライドするメソッドにキーワードoverrideをつける
+    override fun say() {
+        print("meow")
+    }
+}
+val cat = Cat()
+cat.say() // サブクラスのsay()が呼ばれる
+// meow
+
+
+リスト2-78
+open class Animal {
+    open fun say() { print("Animal") }
+}
+
+class Cat: Animal() {
+    override fun say() {
+        // スーパークラスのメソッドを呼び出す
+        super.say()
+    }
+}
+val cat = Cat()
+cat.say()
+// Animal
+
+
+リスト2-82
+// Animalのインターフェース
+interface Animal {
+    fun say()
+}
+
+// 以下実装クラス
+class Cat : Animal {
+    // 実装クラスの関数にはキーワードoverrideをつける
+    override fun say() = print("meow")
+}
+
+class Dog : Animal {
+    override fun say() = print("bow wow")
+}
+
+val cat = Cat()
+val dog = Dog()
+
+cat.say() // meow
+dog.say() // bow wow
+
+
+リスト2-83
+interface Animal {
+    val name: String
+}
+
+class Cat : Animal {
+    override val name: String = "mike"
+}
+
+val cat = Cat()
+print(cat.name) // mike
+
+
+リスト2-90
+data class Cat(val name: String) // キーワードdataを外すと結果はfalseとなる
+val mike1 = Cat("mike")
+val mike2 = Cat("mike")
+print(mike1 == mike2) // データクラスでない場合はfalseとなる
+// true
+
+
+## 2-7 高階関数とラムダ
+リスト2-92
+val multiply: (Int, Int) -> Int = { a: Int, b: Int ->
+    a * b
+}
+val result = multiply(12, 10)
+print(result)
+// 120
+
+
+リスト2-93
+data class Cat(val age: Int)
+val cats = mutableListOf(Cat(10), Cat(4), Cat(2))
+cats.sortBy(
+    { cat: Cat -> // ラムダ式で関数オブジェクトを生成
+        cat.age // ラムダ式は最後の行が返り値になる
+    }
+)
+print(cats)
+// Cat(age=2), Cat(age=4), Cat(age=10)
+
+
+## 2-8 スコープ関数と拡張関数
+リスト2-98 記述例
+data class Cat(var name: String, var weight: Int? = 0)
+val cat = Cat("mike").apply {
+    weight = 10
+}
+print("${cat.name} ${cat.weight}")
+// mike 10
+
+
+リスト2-99
+data class Cat(var name: String, var weight: Int? = 0)
+val cat = Cat("mike").also {
+    it.weight = 10
+}
+print(cat)
+// Cat(name=mike, weight=10)
+
+
+リスト2-100
+class Cat(var name: String? = null)
+val cat: Cat? = Cat("mike") // Cat()をnullに書き換えると何も起こらなくなる
+val catName: String? = cat?.let {
+    it.name // ラムダ式の結果が返り値
+}
+print(catName)
+// mike
+
+
+リスト2-102
+fun String.isLong(): Boolean {
+    return this.toLongOrNull() != null
+}
+print("1234".isLong())
+// true
+
+
+## 2-9 コルーチンとKotlin Cotourines Flow
+リスト2-105
+import kotlinx.coroutines.* // コルーチンライブラリをインポート
+
+GlobalScope.launch { // (1)コルーチンを起動
+    delay(1000L) // (2)コルーチンを1秒中断する
+    print("World!") // (4)1秒後にWorld!を表示
+}
+print("Hello,") // (3)Hello,を表示
+// Hello,World!
+
+
+リスト2-108
+import kotlinx.coroutines.*
+
+val job: Job = GlobalScope.launch { // 親コルーチン
+    this.launch { // 子コルーチン。親のスコープと紐つける。thisは省略可能
+        delay(1000L)
+        print("World!")
+    }
+}
+print("Hello,")
+job.cancel()
+// Hello,
+
+
+リスト2-109
+import kotlinx.coroutines.*
+import java.util.Date
+
+// 1秒後にfooを返す
+suspend fun foo(): String {
+    delay(1000L)
+    return "foo"
+}
+
+// 2秒後にbaaを返す
+suspend fun baa(): String {
+    delay(2000L)
+    return "baa"
+}
+
+GlobalScope.launch {
+    val start = Date().time
+    val foo: Deferred<String> = async { foo() }
+    val baa: Deferred<String> = async { baa() }
+    print("${foo.await()}${baa.await()}") // 両方のsuspend関数が終了する2秒後にfoobaaが表示される
+    print("${Date().time - start}ミリ秒")
+}
+// foobaa2007ms
+
+
+リスト2-110
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+
+// Flowを返す関数
+fun foobaa(): Flow<Int> = flow<Int> { // (1)flowビルダーでflowを生成 
+    print("flow-start, ")
+    for (i in 0..2) {
+        delay(1000) // 何らかの時間のかかる処理
+        emit(i) // (2)emitで値を送信
+    }
+    print("flow-end, ")
+}
+
+GlobalScope.launch { // (3)Flowの呼び出し
+    
+    val f: Flow<Int> = foobaa() // (4)関数を呼び出しているが、動作しない！
+
+    print("collect-start, ")
+    f.collect { i -> // (5)collect()で値の収集を開始すると...
+        println("i=$i, ") // flowの中でemit()が呼ばれるたびに値が受信できる
+    }
+    print("collect-end")
+}
+// collect-start, flow-start, i=0, i=1, i=2, flow-end, collect-end
